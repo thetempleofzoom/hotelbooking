@@ -16,6 +16,11 @@ class Hotel:
         list_hotels.loc[list_hotels['id'] == self.hotel_id, 'available'] = 'no'
         list_hotels.to_csv('hotels.csv', index=False)
 
+    #avail to class method, not just instances of class
+    @classmethod
+    def hotel_count(cls):
+        return len(list_hotels)
+
         
 class Confo:
     def __init__(self, name, hotel_chosen):
@@ -72,6 +77,8 @@ cards = pd.read_csv('cards.csv', sep=",")
 passwords = pd.read_csv('card_security.csv', sep=',')
 #cards.astype('string').dtypes
 list_hotels = pd.read_csv('hotels.csv')
+#call Class method without instantiating instance
+print(f'there are {Hotel.hotel_count()} hotels to choose from:')
 print(list_hotels)
 hotel_chosen = int(input('enter id of hotel: '))
 hotel = Hotel(hotel_chosen)
