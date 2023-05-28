@@ -62,7 +62,14 @@ class Payment:
             return False
 
 
+#inheritance class
+class ExtraLayer(Payment):
+    def authenticate(self, pw):
+        if pw == passwords[passwords['number'] ==self.ccard]['password'].squeeze().strip():
+            return True
+
 cards = pd.read_csv('cards.csv', sep=",")
+passwords = pd.read_csv('card_security.csv', sep=',')
 #cards.astype('string').dtypes
 list_hotels = pd.read_csv('hotels.csv')
 print(list_hotels)
@@ -74,16 +81,21 @@ if hotel_chosen in list_hotels['id'].values:
     if hotel.available():
         #check if cc exists
         ccard = int(input('input credit card number, no spaces: ').strip())
+        pw = input('card password?:').strip()
 
-        payment = Payment(ccard)
+        payment = ExtraLayer(ccard)
         if payment.validate():
             if payment.prompt():
-                #change avail status of hotel
-                hotel.book()
-                name = input('enter your name: ')
-                confo = Confo(name, hotel_chosen)
-                #generate confo
-                confo.generate()
+                #add final layer of confirmation
+                if payment.authenticate(pw=pw):
+                    #change avail status of hotel
+                    hotel.book()
+                    name = input('enter your name: ')
+                    confo = Confo(name, hotel_chosen)
+                    #generate confo
+                    confo.generate()
+                else:
+                    print('card authentication failed')
         else:
             print('credit card details incorrect')
     else:

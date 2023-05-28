@@ -1,6 +1,6 @@
 id,name,city,capacity,available
-134,Tourist Sunny Apartment,Anchorage,4,yes
+134,Tourist Sunny Apartment,Anchorage,4,no
 188,Snow Palace,New Delhi,5, yes
 655,City Break Inn,Porto-Novo,3,no
-20, Eevolve, Dharamshala,2,no
-1, Manali Castle, Manali,3,no
+20, Eevolve, Dharamshala,2,yes
+1, Manali Castle, Manali,3, yes
