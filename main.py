@@ -32,10 +32,14 @@ class Confo:
         city = list_hotels.loc[list_hotels['id'] == self.hotel_id, 'city'].squeeze()
         capacity = list_hotels.loc[list_hotels['id'] == self.hotel_id, 'capacity'].squeeze()
         print(f"""
-        dear {name}, 
+        dear {self.cust_name}, 
         you have booked {hotel_name} in the city of {city}
         with a capacity of {capacity} pax""")
 
+    @property
+    def cust_name(self):
+        propername = self.name.strip().title()
+        return propername
 
 
 class Payment:
